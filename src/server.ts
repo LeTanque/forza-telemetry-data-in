@@ -1,0 +1,159 @@
+// @ts-check
+// server.js (Node.js)
+import express from "express";
+import http from "http";
+import socketIo from "socket.io";
+import * as dgram from "dgram";
+import path from "path";
+import { ForzaTelemetry } from "./telemetry";
+import { decodeTelemetry } from "./telemetry";
+
+const app = express();
+
+app.use(express.static(path.join(__dirname, "../react-app/build")));
+
+const udpMessage = dgram.createSocket("udp4");
+
+const PORT = 5300; // Choose a port to listen on
+
+udpMessage.bind(PORT);
+
+udpMessage.on("error", (err: any) => {
+  console.error(`Server ERROR >>> \n${err.stack}`);
+  udpMessage.close();
+});
+
+// server.on("listening", () => {
+//   const address = server.address();
+//   console.log(`UDP LISTENING >>> ${address.address}:${address.port}`);
+// });
+
+// S Signed Integer
+// U Unsigned Integer
+// F Floating Point
+
+udpMessage.on("message", (msg: Buffer, rinfo: dgram.RemoteInfo) => {
+  // const isRaceOn: boolean = msg.readInt8(0) > 0 ? true : false;
+  // const timestampMS = msg.readUInt32LE(4);
+  // console.log("\n>>>>>>>> isRaceOn:", isRaceOn, rinfo.address, timestampMS);
+
+  // const engineMaxRpm = msg.readFloatLE(8);
+  // console.log("engineMaxRpm:", engineMaxRpm);
+
+  // const engineIdleRpm = msg.readFloatLE(12);
+  // console.log("engineIdleRpm:", engineIdleRpm);
+
+  // const currentEngineRpm = msg.readFloatLE(16);
+  // console.log("currentEngineRpm:", currentEngineRpm);
+
+  // const speed = msg.readFloatLE(244);
+  // console.log("\nspeed:", speed);
+
+  // // TIRES
+  // const tireTempFl = msg.readFloatLE(256).toFixed(1);
+  // console.log("\ntireTemp FL:", tireTempFl);
+
+  // const tireTempFr = msg.readFloatLE(260).toFixed(1);
+  // console.log("tireTemp FR:", tireTempFr);
+
+  // const tireTempRl = msg.readFloatLE(264).toFixed(1);
+  // console.log("tireTemp RL:", tireTempRl);
+
+  // const tireTempRr = msg.readFloatLE(268).toFixed(1);
+  // console.log("tireTemp RR:", tireTempRr);
+
+  // // TRANS
+  // const accelerator = msg.readInt8(303);
+  // console.log("\naccelerator:", accelerator);
+
+  // const clutch = msg.readInt8(305) === 0 ? "-" : "engaged";
+  // console.log("clutch:", clutch);
+
+  // const gear = msg.readInt8(307) === 11 ? "-" : msg.readInt8(307);
+  // console.log("gear:", gear);
+  // console.log(msg.length);
+  console.log(msg);
+  const telemetry = decodeTelemetry(msg);
+  console.log("--------------------------------");
+  console.log("\nRace", telemetry.isRaceOn, telemetry.timestampMS);
+
+  if (telemetry.isRaceOn) {
+    console.log("\nSpeed", telemetry.speed.toFixed(1));
+    console.log("RPM", telemetry.currentEngineRpm.toFixed(1));
+    console.log("Gear", telemetry.gear);
+    console.log("clutch", telemetry.clutch);
+
+    console.log("\nBoost", telemetry.boost.toFixed(2));
+    console.log("Fuel", telemetry.fuel.toFixed(2));
+    console.log("Accelerator", telemetry.accelerator);
+    console.log("Brake", telemetry.brake);
+    console.log("Distance Traveled", telemetry.distanceTraveled.toFixed(1));
+
+    console.log("\nPower", telemetry.power.toFixed(3));
+    console.log("Torque", telemetry.torque.toFixed(3));
+    console.log("Max RPM", telemetry.engineMaxRpm.toFixed(1));
+
+    console.log("\nYaw", telemetry.yaw.toFixed(2));
+    console.log("Pitch", telemetry.pitch.toFixed(2));
+    console.log("Roll", telemetry.roll.toFixed(2));
+
+    console.log("\nAcceleration X", telemetry.accelerationX.toFixed(8));
+    console.log("Acceleration Y", telemetry.accelerationY.toFixed(8));
+    console.log("Acceleration Z", telemetry.accelerationZ.toFixed(8));
+
+    console.log("\nVelocity X", telemetry.velocityX.toFixed(4));
+    console.log("Velocity Y", telemetry.velocityY.toFixed(4));
+    console.log("Velocity Z", telemetry.velocityZ.toFixed(4));
+
+    console.log("Angular Velocity X", telemetry.angularVelocityX.toFixed(4));
+    console.log("Angular Velocity Y", telemetry.angularVelocityY.toFixed(4));
+    console.log("Angular Velocity Z", telemetry.angularVelocityZ.toFixed(4));
+
+    console.log(
+      "\nSuspension Travel Meters FL",
+      telemetry.suspensionTravelMetersFL.toFixed(8)
+    );
+    console.log(
+      "Suspension Travel Meters FR",
+      telemetry.suspensionTravelMetersFR.toFixed(8)
+    );
+    console.log(
+      "Suspension Travel Meters RL",
+      telemetry.suspensionTravelMetersRL.toFixed(8)
+    );
+    console.log(
+      "Suspension Travel Meters RR",
+      telemetry.suspensionTravelMetersRR.toFixed(8)
+    );
+
+    console.log("\nTire Slip Ratio FL", telemetry.tireSlipRatioFL.toFixed(8));
+    console.log("Tire Slip Ratio FR", telemetry.tireSlipRatioFR.toFixed(8));
+    console.log("Tire Slip Ratio RL", telemetry.tireSlipRatioRL.toFixed(8));
+    console.log("Tire Slip Ratio RR", telemetry.tireSlipRatioRR.toFixed(8));
+
+    console.log("\nTire Slip Angle FL", telemetry.tireSlipAngleFL.toFixed(2));
+    console.log("Tire Slip Angle FR", telemetry.tireSlipAngleFR.toFixed(2));
+    console.log("Tire Slip Angle RL", telemetry.tireSlipAngleRL.toFixed(2));
+    console.log("Tire Slip Angle RR", telemetry.tireSlipAngleRR.toFixed(2));
+
+    console.log("\nCombined Slip FL", telemetry.combinedSlipFL.toFixed(2));
+    console.log("Combined Slip FR", telemetry.combinedSlipFR.toFixed(2));
+    console.log("Combined Slip RL", telemetry.combinedSlipRL.toFixed(2));
+    console.log("Combined Slip RR", telemetry.combinedSlipRR.toFixed(2));
+
+    console.log("\nWheel Rotation Speed FL", telemetry.wheelRotationSpeedFL);
+    console.log("Wheel Rotation Speed FR", telemetry.wheelRotationSpeedFR);
+    console.log("Wheel Rotation Speed RL", telemetry.wheelRotationSpeedRL);
+    console.log("Wheel Rotation Speed RR", telemetry.wheelRotationSpeedRR);
+
+    console.log("\nSuspension Velocity FL", telemetry.suspensionVelocityFL);
+    console.log("Suspension Velocity FR", telemetry.suspensionVelocityFR);
+    console.log("Suspension Velocity RL", telemetry.suspensionVelocityRL);
+    console.log("Suspension Velocity RR", telemetry.suspensionVelocityRR);
+
+    console.log("\nTire Temp FL", telemetry.tireTempFL.toFixed(2));
+    console.log("Tire Temp FR", telemetry.tireTempFR.toFixed(2));
+    console.log("Tire Temp RL", telemetry.tireTempRL.toFixed(2));
+    console.log("Tire Temp RR", telemetry.tireTempRR.toFixed(2));
+  }
+});
