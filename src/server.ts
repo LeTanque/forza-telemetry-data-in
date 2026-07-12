@@ -23,6 +23,8 @@ udpMessage.on("error", (err: any) => {
   udpMessage.close();
 });
 
+const debug = true;
+
 // server.on("listening", () => {
 //   const address = server.address();
 //   console.log(`UDP LISTENING >>> ${address.address}:${address.port}`);
@@ -33,81 +35,42 @@ udpMessage.on("error", (err: any) => {
 // F Floating Point
 
 udpMessage.on("message", (msg: Buffer, rinfo: dgram.RemoteInfo) => {
-  // const isRaceOn: boolean = msg.readInt8(0) > 0 ? true : false;
-  // const timestampMS = msg.readUInt32LE(4);
-  // console.log("\n>>>>>>>> isRaceOn:", isRaceOn, rinfo.address, timestampMS);
-
-  // const engineMaxRpm = msg.readFloatLE(8);
-  // console.log("engineMaxRpm:", engineMaxRpm);
-
-  // const engineIdleRpm = msg.readFloatLE(12);
-  // console.log("engineIdleRpm:", engineIdleRpm);
-
-  // const currentEngineRpm = msg.readFloatLE(16);
-  // console.log("currentEngineRpm:", currentEngineRpm);
-
-  // const speed = msg.readFloatLE(244);
-  // console.log("\nspeed:", speed);
-
-  // // TIRES
-  // const tireTempFl = msg.readFloatLE(256).toFixed(1);
-  // console.log("\ntireTemp FL:", tireTempFl);
-
-  // const tireTempFr = msg.readFloatLE(260).toFixed(1);
-  // console.log("tireTemp FR:", tireTempFr);
-
-  // const tireTempRl = msg.readFloatLE(264).toFixed(1);
-  // console.log("tireTemp RL:", tireTempRl);
-
-  // const tireTempRr = msg.readFloatLE(268).toFixed(1);
-  // console.log("tireTemp RR:", tireTempRr);
-
-  // // TRANS
-  // const accelerator = msg.readInt8(303);
-  // console.log("\naccelerator:", accelerator);
-
-  // const clutch = msg.readInt8(305) === 0 ? "-" : "engaged";
-  // console.log("clutch:", clutch);
-
-  // const gear = msg.readInt8(307) === 11 ? "-" : msg.readInt8(307);
-  // console.log("gear:", gear);
-  // console.log(msg.length);
-  console.log(msg);
+  // console.log(msg);
   const telemetry = decodeTelemetry(msg);
   console.log("--------------------------------");
-  console.log("\nRace", telemetry.isRaceOn, telemetry.timestampMS);
-  // const carClassLetter = () => {
-  //   switch (telemetry.carClass) {
-  //     case 3:
-  //       return "A";
-  //   }
-  // };
+  console.log(
+    "\nStatus: ",
+    telemetry.isRaceOn ? "Fucking send it" : "Idle"
+    // telemetry.timestampMS
+  );
 
-  if (telemetry.isRaceOn) {
+  if (telemetry.isRaceOn && !!debug) {
     console.log("\nSpeed", telemetry.speed.toFixed(1));
-    console.log("RPM", telemetry.currentEngineRpm.toFixed(1));
-    console.log("Gear", telemetry.gear);
-    console.log("clutch", telemetry.clutch === 0 ? "disengaged" : "clutch IN");
+    console.log("RPM  ", telemetry.currentEngineRpm.toFixed(1));
+    console.log(
+      "Gear ",
+      telemetry.gear === 0 ? "R" : telemetry.gear,
+      telemetry.clutch === 0 ? "clutch out" : "clutch IN"
+    );
     console.log(
       "\nCar Class",
       telemetry.carClass === 0
-        ? "D"
+        ? `D${telemetry.carPI}`
         : telemetry.carClass === 1
-        ? "C"
+        ? `C${telemetry.carPI}`
         : telemetry.carClass === 2
-        ? "B"
+        ? `B${telemetry.carPI}`
         : telemetry.carClass === 3
-        ? "A"
+        ? `A${telemetry.carPI}`
         : telemetry.carClass === 4
-        ? "S1"
+        ? `S1${telemetry.carPI}`
         : telemetry.carClass === 5
-        ? "S2"
+        ? `S2${telemetry.carPI}`
         : telemetry.carClass === 6
-        ? "R"
+        ? `R${telemetry.carPI}`
         : telemetry.carClass === 7
-        ? "X"
+        ? `X${telemetry.carPI}`
         : undefined,
-      telemetry.carPI,
       telemetry.drivetrainType === 0
         ? "FWD"
         : telemetry.drivetrainType === 1

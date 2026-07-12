@@ -1,7 +1,7 @@
 {
   "name": "forza-telemetry-data-in",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Forza UDP Telemetry Parser",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
@@ -9,8 +9,8 @@
     "build": "tsc",
     "serve": "node src/server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["UDP", "Forza"],
+  "author": "Frank Martinez",
   "license": "ISC",
   "dependencies": {
     "buffer": "^6.0.3",

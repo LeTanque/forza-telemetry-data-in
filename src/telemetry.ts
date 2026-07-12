@@ -10,15 +10,17 @@ export interface ForzaTelemetry {
   engineIdleRpm: number;
   currentEngineRpm: number;
 
-  // Motion
+  // In the car's local space; X = right, Y = up, Z = forward
   accelerationX: number;
   accelerationY: number;
   accelerationZ: number;
 
+  // In the car's local space; X = right, Y = up, Z = forward
   velocityX: number;
   velocityY: number;
   velocityZ: number;
 
+  // Angular velocity in the car's local space (rad/s); X = pitch, Y = yaw, Z = roll
   angularVelocityX: number;
   angularVelocityY: number;
   angularVelocityZ: number;
