@@ -1,7 +1,7 @@
 # Forza UDP Telemetry Parser 
 <div style="display:flex" >
   <div  >
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/FH6_Logo.png" alt="Forza Horizon 6" width="90%">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/FH6_Logo.png" alt="Forza Horizon 6" width="20%">
   </div>
   <div  >
     Forza Horizon 6 is an arcade-like racing game for Xbox and PC.
