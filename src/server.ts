@@ -76,12 +76,47 @@ udpMessage.on("message", (msg: Buffer, rinfo: dgram.RemoteInfo) => {
   const telemetry = decodeTelemetry(msg);
   console.log("--------------------------------");
   console.log("\nRace", telemetry.isRaceOn, telemetry.timestampMS);
+  // const carClassLetter = () => {
+  //   switch (telemetry.carClass) {
+  //     case 3:
+  //       return "A";
+  //   }
+  // };
 
   if (telemetry.isRaceOn) {
     console.log("\nSpeed", telemetry.speed.toFixed(1));
     console.log("RPM", telemetry.currentEngineRpm.toFixed(1));
     console.log("Gear", telemetry.gear);
-    console.log("clutch", telemetry.clutch);
+    console.log("clutch", telemetry.clutch === 0 ? "disengaged" : "clutch IN");
+    console.log(
+      "\nCar Class",
+      telemetry.carClass === 0
+        ? "D"
+        : telemetry.carClass === 1
+        ? "C"
+        : telemetry.carClass === 2
+        ? "B"
+        : telemetry.carClass === 3
+        ? "A"
+        : telemetry.carClass === 4
+        ? "S1"
+        : telemetry.carClass === 5
+        ? "S2"
+        : telemetry.carClass === 6
+        ? "R"
+        : telemetry.carClass === 7
+        ? "X"
+        : undefined,
+      telemetry.carPI,
+      telemetry.drivetrainType === 0
+        ? "FWD"
+        : telemetry.drivetrainType === 1
+        ? "RWD"
+        : telemetry.drivetrainType === 2
+        ? "AWD"
+        : undefined,
+      telemetry.carOrdinal
+    );
 
     console.log("\nBoost", telemetry.boost.toFixed(2));
     console.log("Fuel", telemetry.fuel.toFixed(2));

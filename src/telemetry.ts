@@ -55,15 +55,64 @@ export interface ForzaTelemetry {
   wheelRotationSpeedRL: number;
   wheelRotationSpeedRR: number;
 
+  // Wheel On Rumble
+  wheelOnRumbleStripSpeedFL: number;
+  wheelOnRumbleStripSpeedFR: number;
+  wheelOnRumbleStripSpeedRL: number;
+  wheelOnRumbleStripSpeedRR: number;
+
+  // Wheel In Puddle
+  wheelInPuddleFL: number;
+  wheelInPuddleFR: number;
+  wheelInPuddleRL: number;
+  wheelInPuddleRR: number;
+
+  // Surface Rumble
+  surfaceRumbleFL: number;
+  surfaceRumbleFR: number;
+  surfaceRumbleRL: number;
+  surfaceRumbleRR: number;
+
   // Suspension Velocity
   suspensionVelocityFL: number;
   suspensionVelocityFR: number;
   suspensionVelocityRL: number;
   suspensionVelocityRR: number;
 
-  // Car
+  // Unique ID of car make/model
+  carOrdinal: number;
+
+  // Car class (0-7)
+  carClass: number;
+
+  // Car Performance Index
+  carPI: number;
+
+  // Drivetrain Type
+  drivetrainType: number;
+
+  // Number of Cyliners
+  numCylinders: number;
+
+  // Car group ID
+  carGroup: number;
+
+  // Velocity loss from smashable object collision (m/s)
+  smashableVelocityVelDelta: number;
+
+  //  Mass of recently hit smashable object (kg)
+  smashableMass: number;
+
+  // Position in world space (meters)
+  positionX: number;
+  positionY: number;
+  positionZ: number;
+
+  // Speed in meters per second
   speed: number;
+  // Power in Watts
   power: number;
+  // Torque in newton-meters
   torque: number;
 
   // Tire Temps
@@ -186,6 +235,34 @@ export function decodeTelemetry(msg: Buffer): ForzaTelemetry {
     tireSlipRatioRL: f32(),
     tireSlipRatioRR: f32(),
 
+    // Wheel Rotation Speed
+
+    wheelRotationSpeedFL: f32(),
+    wheelRotationSpeedFR: f32(),
+    wheelRotationSpeedRL: f32(),
+    wheelRotationSpeedRR: f32(),
+
+    // Wheel Rotation Speed
+
+    wheelOnRumbleStripSpeedFL: i32(),
+    wheelOnRumbleStripSpeedFR: i32(),
+    wheelOnRumbleStripSpeedRL: i32(),
+    wheelOnRumbleStripSpeedRR: i32(),
+
+    // Wheel Rotation Speed
+
+    wheelInPuddleFL: i32(),
+    wheelInPuddleFR: i32(),
+    wheelInPuddleRL: i32(),
+    wheelInPuddleRR: i32(),
+
+    // Surface Rumble
+
+    surfaceRumbleFL: f32(),
+    surfaceRumbleFR: f32(),
+    surfaceRumbleRL: f32(),
+    surfaceRumbleRR: f32(),
+
     // Tire Slip Angle
 
     tireSlipAngleFL: f32(),
@@ -200,13 +277,6 @@ export function decodeTelemetry(msg: Buffer): ForzaTelemetry {
     combinedSlipRL: f32(),
     combinedSlipRR: f32(),
 
-    // Wheel Rotation Speed
-
-    wheelRotationSpeedFL: f32(),
-    wheelRotationSpeedFR: f32(),
-    wheelRotationSpeedRL: f32(),
-    wheelRotationSpeedRR: f32(),
-
     // Suspension Velocity
 
     suspensionVelocityFL: f32(),
@@ -214,7 +284,46 @@ export function decodeTelemetry(msg: Buffer): ForzaTelemetry {
     suspensionVelocityRL: f32(),
     suspensionVelocityRR: f32(),
 
-    // Car
+    // Car UID
+
+    carOrdinal: i32(),
+
+    // Car Class
+
+    carClass: i32(),
+
+    // Car PI
+
+    carPI: i32(),
+
+    // Drivetrain type
+
+    drivetrainType: i32(),
+
+    // Number of Cylinders
+
+    numCylinders: i32(),
+    // ! -- BEGIN THESE VALUES ARE NOT PRESENT IN FORZA MS 2023
+    // Car group
+
+    carGroup: u32(),
+
+    // Velocity loss from smashable object collision (m/s)
+
+    smashableVelocityVelDelta: f32(),
+
+    // Mass of recently hit smashable object (kg)
+
+    smashableMass: f32(),
+    // ! -- END THESE VALUES ARE NOT PRESENT IN FORZA MS 2023
+
+    // Position in world space (meters)
+
+    positionX: f32(),
+    positionY: f32(),
+    positionZ: f32(),
+
+    // Speed in meters per second
 
     speed: f32(),
     power: f32(),
@@ -249,7 +358,7 @@ export function decodeTelemetry(msg: Buffer): ForzaTelemetry {
     gear: u8(),
     steer: i8(),
 
-    drivingLine: u8(),
+    drivingLine: i8(),
     aiBrakeDifference: i8(),
   };
 }
