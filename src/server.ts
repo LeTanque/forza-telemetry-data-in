@@ -25,15 +25,6 @@ udpMessage.on("error", (err: any) => {
 
 const debug = true;
 
-// server.on("listening", () => {
-//   const address = server.address();
-//   console.log(`UDP LISTENING >>> ${address.address}:${address.port}`);
-// });
-
-// S Signed Integer
-// U Unsigned Integer
-// F Floating Point
-
 udpMessage.on("message", (msg: Buffer, rinfo: dgram.RemoteInfo) => {
   // console.log(msg);
   const telemetry = decodeTelemetry(msg);
