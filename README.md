@@ -6,7 +6,7 @@
     <br/>
     Forza Motorsport 2023 is a simulation-like racing game for Xbox and PC.
     <br/>
-    *This parser is tested on FH6*, but with small modification will work with FM2023.
+    <b>This parser is tested on FH6</b>, but with small modification will work with FM2023.
     <div>
   
   ### Problem
