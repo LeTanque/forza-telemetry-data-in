@@ -33,6 +33,31 @@ https://youtu.be/r31qYQeFCFY?is=Cz0JxLd2vZs5o44i">
 </p>
 ^^^ Link to YouTube video 👍🏼
 
+## Arch Design
+
+```
+                     Forza UDP
+                         │
+                         ▼
+                 ┌────────────────┐
+                 │ Parser Service │
+                 │ (server.ts)    │
+                 └────────────────┘
+                         │
+              normalized telemetry
+                         │
+              publish/update stream
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
+  Dashboard Backend              Data Recorder
+(API + WebSocket)                (historical data)
+          │                             │
+          ▼                             ▼
+    React Dashboard                SQLite/Postgres
+          │
+          ▼
+    Driver / Tuner
+```
 
 ## Notes
 Effective tuning considers three dimensions:
