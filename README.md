@@ -45,7 +45,7 @@ TEAM HAVOK 2025
                  └────────────────┘
                          │
               normalized telemetry
-                         │
+                         │  ◀ -------------- this repo gets you here
               publish/update stream
           ┌──────────────┴──────────────┐
           ▼                             ▼
