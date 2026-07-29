@@ -26,7 +26,7 @@ This project would not exist if not for *Team Havok* and the beautiful culture o
 <p align="left">
   <a href="https://youtu.be/r31qYQeFCFY?is=Cz0JxLd2vZs5o44i
 https://youtu.be/r31qYQeFCFY?is=Cz0JxLd2vZs5o44i">
-    <img src="https://i.ytimg.com/an_webp/r31qYQeFCFY/mqdefault_6s.webp?du=3000&sqp=CLyxzdIG&rs=AOn4CLDTw40CFf0I0nYJIiTXVRX-AU1q4g" alt="Team Havok 2025" width="25%">
+TEAM HAVOK 2025
   </a>
 </p>
 ^^^ Link to YouTube video 👍🏼
