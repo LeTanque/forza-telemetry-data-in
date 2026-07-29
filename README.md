@@ -18,7 +18,6 @@
   </div>
 </div>
 
-
 ## Team Havok
 This project would not exist if not for *Team Havok* and the beautiful culture of information sharing that has blossomed in our discord and started on Fujimi Kaido, in Forza Motorsport 2023. If you think gatekeeping is lame, race in A class and below, know how to be competitive without being toxic, are interested in meeting some of the fastest Forza drivers in the _world_, apply here: **[Discord Invite](https://discord.gg/qA4JeUdNd)**
 
@@ -33,6 +32,10 @@ TEAM HAVOK 2025
 
 
 ## Notes
+This UDP parser is not _everything_ you will need to learn from your telemetry data, but it is the most important first step if you intend to. With the UDP data parsed and typed-out, you can confidently build on top of it.
+
+------------
+
 Effective tuning considers three dimensions:
 - Vehicle
 - Environment (track)
