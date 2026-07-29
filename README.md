@@ -1,14 +1,12 @@
 # Forza UDP Telemetry Parser 
 <div style="display:flex" >
-  <div  >
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/FH6_Logo.png" alt="Forza Horizon 6" width="20%">
-  </div>
+
   <div  >
     Forza Horizon 6 is an arcade-like racing game for Xbox and PC.
     <br/>
     Forza Motorsport 2023 is a simulation-like racing game for Xbox and PC.
     <br/>
-    This parser is tested on FH6, but with small modification will work with FM2023.
+    <b>This parser is tested on FH6</b>, but with small modification will work with FM2023.
     <div>
   
   ### Problem
@@ -20,7 +18,6 @@
   </div>
 </div>
 
-
 ## Team Havok
 This project would not exist if not for *Team Havok* and the beautiful culture of information sharing that has blossomed in our discord and started on Fujimi Kaido, in Forza Motorsport 2023. If you think gatekeeping is lame, race in A class and below, know how to be competitive without being toxic, are interested in meeting some of the fastest Forza drivers in the _world_, apply here: **[Discord Invite](https://discord.gg/qA4JeUdNd)**
 
@@ -28,7 +25,7 @@ This project would not exist if not for *Team Havok* and the beautiful culture o
 <p align="left">
   <a href="https://youtu.be/r31qYQeFCFY?is=Cz0JxLd2vZs5o44i
 https://youtu.be/r31qYQeFCFY?is=Cz0JxLd2vZs5o44i">
-    <img src="https://i.ytimg.com/an_webp/r31qYQeFCFY/mqdefault_6s.webp?du=3000&sqp=CLyxzdIG&rs=AOn4CLDTw40CFf0I0nYJIiTXVRX-AU1q4g" alt="Team Havok 2025" width="25%">
+TEAM HAVOK 2025
   </a>
 </p>
 ^^^ Link to YouTube video 👍🏼
@@ -60,6 +57,10 @@ https://youtu.be/r31qYQeFCFY?is=Cz0JxLd2vZs5o44i">
 ```
 
 ## Notes
+This UDP parser is not _everything_ you will need to learn from your telemetry data, but it is the most important first step if you intend to. With the UDP data parsed and typed-out, you can confidently build on top of it.
+
+------------
+
 Effective tuning considers three dimensions:
 - Vehicle
 - Environment (track)
